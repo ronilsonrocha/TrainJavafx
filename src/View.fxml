@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="500.0" pickOnBounds="true">
+         <image>
+            <Image url="@Fundo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="trainCima1" fitHeight="30.0" fitWidth="50.0" layoutX="120.0" pickOnBounds="true">
+         <image>
+            <Image url="@trainCima1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="trainBaixo1" fitHeight="30.0" fitWidth="50.0" layoutX="116.0" layoutY="669.0" pickOnBounds="true">
+         <image>
+            <Image url="@trainBaixo1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="trainBaixo2" fitHeight="30.0" fitWidth="50.0" layoutX="187.0" layoutY="670.0" pickOnBounds="true">
+         <image>
+            <Image url="@trainBaixo2.png" />
+         </image>
+      </ImageView>
+      <Slider fx:id="velocidadeTrain1" layoutX="291.0" layoutY="431.0" max="30.0" onDragDetected="#velocidadeT1" value="15.0" />
+      <Slider fx:id="velocidadeTrain2" layoutX="299.0" layoutY="581.0" max="30.0" onDragDetected="#velocidadeT2" value="15.0" />
+      <Button fx:id="start1" layoutX="216.0" layoutY="239.0" mnemonicParsing="false" onAction="#iniciarAnimacaoDescendo" prefHeight="28.0" prefWidth="62.0" text="Start">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="start4" layoutX="422.0" layoutY="239.0" mnemonicParsing="false" onAction="#iniciarAnimacaoSubindoDescendo" prefHeight="28.0" prefWidth="62.0" text="Start">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="start3" layoutX="353.0" layoutY="239.0" mnemonicParsing="false" onAction="#iniciarAnimacaoDescendoSubindo" prefHeight="28.0" prefWidth="62.0" text="Start">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="start2" layoutX="284.0" layoutY="239.0" mnemonicParsing="false" onAction="#iniciarAnimacaoSubindo" prefHeight="28.0" prefWidth="62.0" text="Start">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="reiniciar" layoutX="309.0" layoutY="639.0" mnemonicParsing="false" onAction="#reiniciarTrains" text="Reiniciar">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="trainCima2" fitHeight="30.0" fitWidth="50.0" layoutX="182.0" layoutY="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@trainCima2.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
