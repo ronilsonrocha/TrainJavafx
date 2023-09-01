@@ -1,4 +1,5 @@
 
+import javafx.animation.Animation;
 import javafx.animation.PathTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,17 +55,44 @@ public class Controle {
         // reiniciar os trens
     }
 
+    // Atributos para as animações
+    private PathTransition transition1;
+    private PathTransition transition2;
+
     // Métodos para aumentar a velocidade do trem 1
     @FXML
     public void velocidadeT1(MouseEvent event) {
-        // aumentar a velocidade do trem 1
+        // Obtém o valor atual do Slider
+        double sliderValue = velocidadeTrain1.getValue();
+        // Calcula a nova duração baseada na velocidade selecionada
+        double newDuration = 5 / sliderValue;
+        // Verifica se a animação do trem 1 está em execução
+        if (transition1.getStatus() == Animation.Status.RUNNING) {
+            // Pausa a animação
+            transition1.pause();
+            // Atualiza a duração da animação do trem 1
+            transition1.setDuration(Duration.seconds(newDuration));
+            // Retoma a animação
+            transition1.play();
+        }
     }
 
     // Métodos para aumentar a velocidade do trem 2
     @FXML
     public void velocidadeT2(MouseEvent event) {
-        // criar metodo para aumentar a velocidade dos trens
-
+        // Obtém o valor atual do Slider
+        double sliderValue = velocidadeTrain2.getValue();
+        // Calcula a nova duração baseada na velocidade selecionada
+        double newDuration = 5 / sliderValue;
+        // Verifica se a animação do trem 2 está em execução
+        if (transition2.getStatus() == Animation.Status.RUNNING) {
+            // Pausa a animação
+            transition2.pause();
+            // Atualiza a duração da animação do trem 2
+            transition2.setDuration(Duration.seconds(newDuration));
+            // Retoma a animação
+            transition2.play();
+        }
     }
 
     @FXML
@@ -72,7 +100,6 @@ public class Controle {
         // Inicia animação descendo dos dois trens
         animacaoTrain1();
         animacaoTrain2();
-
     }
 
     @FXML
@@ -80,7 +107,6 @@ public class Controle {
         // Inicia animação subindo dos dois trens
         animacaoTrain3();
         animacaoTrain4();
-
     }
 
     @FXML
@@ -88,7 +114,6 @@ public class Controle {
         // Inicia animação descendo do trem 1 e subindo do trem 2
         animacaoTrain1();
         animacaoTrain4();
-
     }
 
     @FXML
@@ -96,13 +121,11 @@ public class Controle {
         // Inicia animação subindo do trem 1 e descendo do trem 2
         animacaoTrain3();
         animacaoTrain2();
-
     }
 
     public void animacaoTrain1() {
-        // Criar a animação para o trem 1 descendo
+        // Criar a animação para os trilhos 1 pra baixo
         Path path1 = new Path();
-        PathTransition transition1 = new PathTransition();
         path1.getElements().add(new MoveTo(15, 2));// mover o trem
         path1.getElements().add(new VLineTo(100));// Trilho duplo
         path1.getElements().add(new LineTo(50, 138));
@@ -113,19 +136,21 @@ public class Controle {
         path1.getElements().add(new VLineTo(568));
         path1.getElements().add(new LineTo(15, 608));
         path1.getElements().add(new VLineTo(700));
-        transition1.setDuration(Duration.seconds(6));
+        transition1 = new PathTransition();
         transition1.setNode(trainCima1);
         transition1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
         transition1.setPath(path1);
         transition1.setAutoReverse(false);
         transition1.setCycleCount(PathTransition.INDEFINITE); // execução varias
-        transition1.play();
+        velocidadeTrain1.valueProperty().addListener((observable, oldValue, newValue) -> {
+            transition1.setRate(newValue.doubleValue());
+        });
+        transition1.play();// inicia a animação
     }
 
     public void animacaoTrain2() {
-        // Criar a animação para o trem 1 descendo
+        // Criar a animação para os trilhos 2 pra baixo
         Path path = new Path();
-        PathTransition transition = new PathTransition();
         path.getElements().add(new MoveTo(22, 2));// mover o trem
         path.getElements().add(new VLineTo(100));// Trilho duplo
         path.getElements().add(new LineTo(-10, 138));
@@ -136,20 +161,22 @@ public class Controle {
         path.getElements().add(new VLineTo(568));
         path.getElements().add(new LineTo(22, 608));
         path.getElements().add(new VLineTo(700));
-        transition.setDuration(Duration.seconds(3));
-        transition.setNode(trainCima2);
-        transition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-        transition.setPath(path);
-        transition.setAutoReverse(false);
-        transition.setCycleCount(PathTransition.INDEFINITE); // execução varias
-        transition.play(); // inicia a animação
-
+        transition2 = new PathTransition();
+        transition2 = new PathTransition();
+        transition2.setNode(trainCima2);
+        transition2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        transition2.setPath(path);
+        transition2.setAutoReverse(false);
+        transition2.setCycleCount(PathTransition.INDEFINITE); // execução varias
+        velocidadeTrain2.valueProperty().addListener((observable, oldValue, newValue) -> {
+            transition2.setRate(newValue.doubleValue());
+        });
+        transition2.play(); // inicia a animação
     }
 
     public void animacaoTrain3() {
-        // Criar a animação para o trem 1 descendo
+        // Criar a animação para os trigos 1 subindo
         Path path4 = new Path();
-        PathTransition transition4 = new PathTransition();
         path4.getElements().add(new MoveTo(22, 40));// mover o trem
         path4.getElements().add(new VLineTo(-70));// Trilho duplo
         path4.getElements().add(new LineTo(55, -125));
@@ -160,21 +187,21 @@ public class Controle {
         path4.getElements().add(new VLineTo(-520));
         path4.getElements().add(new LineTo(20, -580));
         path4.getElements().add(new VLineTo(-650));
-        transition4.setDuration(Duration.seconds(6));
-        transition4.setNode(trainBaixo1);// pegar a imagem do trem
-        transition4.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT); // rotação do trem
-        transition4.setPath(path4); // caminho
-        transition4.setAutoReverse(false); // não retroceder a animação
-        transition4.setCycleCount(PathTransition.INDEFINITE); // execução varias
-        transition4.play(); // inicia a animação
-
+        transition1 = new PathTransition();
+        transition1.setNode(trainBaixo1);// pegar a imagem do trem
+        transition1.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT); // rotação do trem
+        transition1.setPath(path4); // caminho
+        transition1.setAutoReverse(false); // não retroceder a animação
+        transition1.setCycleCount(PathTransition.INDEFINITE); // execução varias
+        velocidadeTrain1.valueProperty().addListener((observable, oldValue, newValue) -> {
+            transition1.setRate(newValue.doubleValue());
+        });
+        transition1.play(); // inicia a animação
     }
 
     public void animacaoTrain4() {
-        // Criar a animação para o trem 1 descendo
+        // Criar a animação para os trigos 2 subindo
         Path path3 = new Path();
-        PathTransition transition3 = new PathTransition();
-
         // subir o trainBaixo2
         path3.getElements().add(new MoveTo(20, 40));// mover o trem
         path3.getElements().add(new VLineTo(-65));// Trilho duplo
@@ -186,14 +213,15 @@ public class Controle {
         path3.getElements().add(new VLineTo(-520));
         path3.getElements().add(new LineTo(20, -580));
         path3.getElements().add(new VLineTo(-650));
-        transition3.setDuration(Duration.seconds(6));
-        transition3.setNode(trainBaixo2);
-        transition3.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-        transition3.setPath(path3);
-        transition3.setAutoReverse(false);
-        transition3.setCycleCount(PathTransition.INDEFINITE); // execução varias
-        transition3.play();
-
+        transition2 = new PathTransition();
+        transition2.setNode(trainBaixo2);
+        transition2.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        transition2.setPath(path3);
+        transition2.setAutoReverse(false);
+        transition2.setCycleCount(PathTransition.INDEFINITE); // execução varias
+        velocidadeTrain2.valueProperty().addListener((observable, oldValue, newValue) -> {
+            transition2.setRate(newValue.doubleValue());
+        });
+        transition2.play(); // inicia a animação
     }
-
 }
