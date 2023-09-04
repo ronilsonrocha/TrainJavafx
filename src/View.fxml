@@ -29,8 +29,8 @@
             <Image url="@trainBaixo2.png" />
          </image>
       </ImageView>
-      <Slider fx:id="velocidadeTrain1" blockIncrement="1.0" layoutX="291.0" layoutY="431.0" max="10.0" onDragDetected="#velocidadeT1" value="5.0" />
-      <Slider fx:id="velocidadeTrain2" blockIncrement="1.0" layoutX="299.0" layoutY="581.0" max="10.0" onDragDetected="#velocidadeT2" value="5.0" />
+      <Slider fx:id="velocidadeTrain1" blockIncrement="1.0" layoutX="291.0" layoutY="431.0" majorTickUnit="2.0" max="30.0" minorTickCount="2" onDragDetected="#velocidadeT1" showTickMarks="true" value="15.0" />
+      <Slider fx:id="velocidadeTrain2" blockIncrement="1.0" layoutX="291.0" layoutY="574.0" majorTickUnit="2.0" max="30.0" minorTickCount="2" onDragDetected="#velocidadeT2" showTickMarks="true" value="15.0" />
       <Button fx:id="start1" layoutX="216.0" layoutY="239.0" mnemonicParsing="false" onAction="#iniciarAnimacaoDescendo" prefHeight="28.0" prefWidth="62.0" text="Start">
          <font>
             <Font name="System Bold" size="11.0" />
@@ -51,7 +51,7 @@
             <Font name="System Bold" size="11.0" />
          </font>
       </Button>
-      <Button fx:id="reiniciar" layoutX="309.0" layoutY="639.0" mnemonicParsing="false" onAction="#reiniciarTrains" text="Restart">
+      <Button fx:id="reiniciar" layoutX="293.0" layoutY="291.0" mnemonicParsing="false" onAction="#reiniciarTrains" text="Restart">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
